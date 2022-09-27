@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/mebius8/koa2_api#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.2",
     "koa": "^2.13.4",
     "koa-body": "^5.0.0",
