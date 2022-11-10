@@ -6,12 +6,13 @@ const { tokenExpiredError, invalidToken } = require('../constant/err.type')
 const auth = async (ctx, next) => {
     const { authorization } = ctx.request.header
     const token = authorization.replace('Bearer ','')
-    console.log(token)
+    // console.log(token)
 
     try {
         //user中包含了payload的信息（id, user_name, is_admin）
         const user = jwt.verify(token, JWT_SECRET)
-        ctx.state.user = user
+        console.log(user.dataValues)
+        ctx.state.user = user.dataValues
     }catch (err) {
         switch (err.name){
             case 'TokenExpiredError':
