@@ -1,6 +1,6 @@
 const Koa = require('koa')
 const KoaBody = require('koa-body')
-const router = require('../router')
+const router = require('../router/index')
 const errHandler = require('./errHandler')
 
 const app = new Koa()
