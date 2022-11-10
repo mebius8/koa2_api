@@ -1,12 +1,15 @@
 const Koa = require('koa')
 const KoaBody = require('koa-body')
-const userRouter = require('../router/user.route')
+const router = require('../router')
 const errHandler = require('./errHandler')
 
 const app = new Koa()
 //KoaBody先注册
 app.use(KoaBody())
-app.use(userRouter.routes())
+//注册路由
+app.use(router.routes())
+//request method不匹配时候，在response的header中显示Allow的method
+app.use(router.allowedMethods())
 app.on('error', errHandler)
 
 module.exports = app
