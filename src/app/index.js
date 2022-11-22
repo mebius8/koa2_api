@@ -3,6 +3,7 @@ const path = require('path')
 const Koa = require('koa')
 const KoaBody = require('koa-body')
 const KoaStatic = require('koa-static')
+const parameter = require('koa-parameter')
 
 const router = require('../router/index')
 const errHandler = require('./errHandler')
@@ -19,6 +20,7 @@ app.use(KoaBody({
 }))
 //设置默认的静态文件夹地址
 app.use(KoaStatic(path.join( __dirname, '../upload')))
+app.use(parameter(app))
 //注册路由
 app.use(router.routes())
 //request method不匹配时候，在response的header中显示Allow的method

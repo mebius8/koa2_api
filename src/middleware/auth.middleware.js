@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 const { JWT_SECRET } = require('../config/config.default')
 const { tokenExpiredError, invalidToken, hasNotAdminPermission } = require('../constant/err.type')
 
-
+//登录状态验证
 const auth = async (ctx, next) => {
     const { authorization = '' } = ctx.request.header
     const token = authorization.replace('Bearer ','')
@@ -26,6 +26,7 @@ const auth = async (ctx, next) => {
     await next()
 }
 
+//管理员权限验证
 const hadAdminPermission = async (ctx, next) => {
     const {is_admin} = ctx.state.user
 
