@@ -1,7 +1,7 @@
 const path = require('path')
 
 const {fileUploadError ,unsupportedFileType, publishGoodsError, invalidGoodsID} = require('../constant/err.type')
-const { createGoods, updateGoods ,removeGoods, restoreGoods} = require('../service/goods.service')
+const { createGoods, updateGoods ,removeGoods, restoreGoods, findGoods} = require('../service/goods.service')
 
 class GoodsController{
     async upload(ctx, next){
@@ -76,6 +76,7 @@ class GoodsController{
         }
 
     }
+
     async restore(ctx){
         const res = await restoreGoods(ctx.params.id)
         if(res){
@@ -86,6 +87,17 @@ class GoodsController{
             }
         }else{
             return ctx.app.emit('error', invalidGoodsID, ctx)
+        }
+    }
+
+    async findAll(ctx){
+        const { pageNum = 1, pageSize = 10 } = ctx.request.query
+
+        const res = await findGoods(pageNum, pageSize)
+        ctx.body = {
+            code: 0,
+            message: '获取商品列表成功',
+            result: res
         }
     }
 }

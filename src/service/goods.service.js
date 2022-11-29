@@ -22,6 +22,20 @@ class GoodsService {
         const res = await Goods.restore({where: {id}})
         return res > 0 ? true : false
     }
+
+    async findGoods(pageNum, pageSize){
+        const offset = (pageNum - 1) * pageSize
+        const {count,rows} = await Goods.findAndCountAll({
+            offset: offset,
+            limit: pageSize * 1
+        })
+        return {
+            pageNum,
+            pageSize,
+            total: count,
+            list: rows
+        }
+    }
 }
 
 module.exports = new GoodsService()

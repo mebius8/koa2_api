@@ -3,7 +3,7 @@ const router = new Router({prefix: '/goods'})
 
 const { auth,hadAdminPermission } = require('../middleware/auth.middleware')
 const { validator } = require('../middleware/goods.middleware')
-const { upload , create, update, remove, restore} = require('../controller/goods.controller')
+const { upload , create, update, remove, restore, findAll} = require('../controller/goods.controller')
 
 // 商品图片上传
 //暂时停用上传权限校验
@@ -24,5 +24,9 @@ router.post('/:id/off',auth,hadAdminPermission, remove)
 
 //商品上架
 router.post('/:id/on',auth,hadAdminPermission, restore)
+
+//获取商品列表
+router.get('/', findAll)
+
 
 module.exports = router
