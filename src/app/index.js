@@ -16,7 +16,9 @@ app.use(KoaBody({
         //在option里的相对路径，不是相对的当前文件，而是相对于precess.cwd()
         uploadDir: path.join( __dirname, '../upload'),
         keepExtensions: true
-    }
+    },
+    //配置koabody作用到的请求类型
+    parsedMethods: ['POST', 'PUT', 'PATCH', 'DELETE']
 }))
 //设置默认的静态文件夹地址
 app.use(KoaStatic(path.join( __dirname, '../upload')))
